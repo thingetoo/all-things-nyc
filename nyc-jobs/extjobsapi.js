@@ -1,7 +1,14 @@
-import axios from 'axios';
+const axios = require('axios');
 
-export const nycJobs = () => {
+const nycJobs = (cb) => {
   axios
     .get('https://data.cityofnewyork.us/resource/kpav-sd4t.json')
-    .then((response) => response);
+    .then((response) => {
+      cb(response);
+    })
+    .catch((err) => {
+      cb(err);
+    });
 };
+
+module.exports = nycJobs;
