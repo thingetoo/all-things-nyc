@@ -2,7 +2,7 @@ const axios = require('axios');
 
 const nycJobs = (cb) => {
   axios
-    .get('https://data.cityofnewyork.us/resource/kpav-sd4t.json')
+    .get('https://data.cityofnewyork.us/resource/kpav-sd4t.json?$limit=16')
     .then((response) => {
       cb(response);
     })
