@@ -6,8 +6,8 @@ import Category from '../Category/Category.jsx';
 const CategoryList = (props) => {
   return (
     <div className="category-container">
-      {props.categories.map((category) => {
-        return <Category data={category} />;
+      {props.jobs.map((job, idx) => {
+        return <Category key={idx + job.job_id} data={job} />;
       })}
     </div>
   );

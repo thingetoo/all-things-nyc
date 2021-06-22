@@ -7,7 +7,7 @@ const MainPage = (props) => {
   return (
     <div className="main-page-container">
       <JobList jobs={props.jobs} />
-      <CategoryList />
+      <CategoryList jobs={props.jobs} />
     </div>
   );
 };
