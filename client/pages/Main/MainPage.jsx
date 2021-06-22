@@ -1,10 +1,10 @@
 import React from 'react';
-import JobList from './JobList.jsx';
+import JobList from '../../components/JobList/JobList.jsx';
 
 const MainPage = (props) => {
   return (
     <div>
-      <JobList />
+      <JobList jobs={props.jobs} />
     </div>
   );
 };
