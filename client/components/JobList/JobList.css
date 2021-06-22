@@ -3,4 +3,5 @@
   grid-template-columns: 20% 20% 20% 20%;
   justify-content: center;
   grid-gap: 10px;
+  flex: 7 1 0;
 }

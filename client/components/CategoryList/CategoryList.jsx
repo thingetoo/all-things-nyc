@@ -1,10 +1,14 @@
 import React from 'react';
 import css from './CategoryList.css';
 
-const CategoryList = () => {
+import Category from '../Category/Category.jsx';
+
+const CategoryList = (props) => {
   return (
-    <div>
-      <span>Hello there</span>
+    <div className="category-container">
+      {props.categories.map((category) => {
+        return <Category data={category} />;
+      })}
     </div>
   );
 };
