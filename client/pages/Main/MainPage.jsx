@@ -4,7 +4,7 @@ import CategoryList from '../../components/CategoryList/CategoryList.jsx';
 
 const MainPage = (props) => {
   return (
-    <div>
+    <div className="main-page-container">
       <JobList jobs={props.jobs} />
       <CategoryList />
     </div>

@@ -1,9 +1,10 @@
 import React from 'react';
+import css from './CategoryList.css';
 
 const CategoryList = () => {
   return (
     <div>
-      <span></span>
+      <span>Hello there</span>
     </div>
   );
 };
