@@ -7,7 +7,6 @@ const JobList = (props) => {
     <div className="job-container">
       {props.jobs &&
         props.jobs.map((job, idx) => {
-          console.log(job);
           return <Job key={job.job_id + idx} info={job} />;
         })}
     </div>
