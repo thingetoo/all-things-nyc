@@ -1,11 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Category = (props) => {
-  return (
-    <div>
-      <span> I am a single category</span>
-    </div>
-  );
+  return <div>{props.data[0] + '(' + props.data[1] + ')'}</div>;
 };
 
 export default Category;

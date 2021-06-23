@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import MainPage from '../pages/Main/MainPage.jsx';
 import AboutPage from '../pages/About/About.jsx';
+import JobDescription from '../pages/JobDescription/JobDescription.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,11 +11,13 @@ class App extends React.Component {
     this.state = {
       jobs: [],
       page: 'main',
+      currentJob: {},
     };
     this.getData = this.getData.bind(this);
     this.currentPage = this.currentPage.bind(this);
     this.toAboutPage = this.toAboutPage.bind(this);
     this.toMainPage = this.toMainPage.bind(this);
+    this.toDescriptionPage = this.toDescriptionPage.bind(this);
   }
 
   getData() {
@@ -34,12 +37,27 @@ class App extends React.Component {
     this.getData();
   }
 
+  toDescriptionPage(e, jobInfo) {
+    console.log({ e, jobInfo });
+    this.setState({
+      page: 'description',
+      currentJob: jobInfo,
+    });
+  }
+
   currentPage() {
     const { page } = this.state;
     if (page === 'main') {
-      return <MainPage jobs={this.state.jobs} />;
+      return (
+        <MainPage
+          handleJobClick={this.toDescriptionPage}
+          jobs={this.state.jobs}
+        />
+      );
     } else if (page === 'about') {
       return <AboutPage />;
+    } else if (page === 'description') {
+      return <JobDescription job={this.state.currentJob} />;
     }
   }
 
