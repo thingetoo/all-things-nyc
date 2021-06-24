@@ -3,7 +3,10 @@ import css from './Job.css';
 
 const Job = (props) => {
   return (
-    <div className="single-job">
+    <div
+      onClick={(e) => props.handleJobClick(e, props.info)}
+      className="single-job"
+    >
       <img />
       <div className="job-title">{props.info.business_title.toLowerCase()}</div>
       <div>{props.info.agency}</div>
