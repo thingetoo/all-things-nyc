@@ -18,6 +18,7 @@ class App extends React.Component {
     this.toAboutPage = this.toAboutPage.bind(this);
     this.toMainPage = this.toMainPage.bind(this);
     this.toDescriptionPage = this.toDescriptionPage.bind(this);
+    this.createNewUser = this.createNewUser.bind(this)
   }
 
   getData() {
@@ -33,8 +34,24 @@ class App extends React.Component {
       });
   }
 
+  createNewUser() {
+    var obj = {
+      firstName: 'Jordan',
+      lastName: 'Hamsyyy'
+    }
+
+    axios.post('/api/user', obj)
+    .then((res) => {
+      console.log('successfully posted!', res.data)
+    })
+    .catch((err) => {
+      console.log('err in posting', err)
+    })
+  }
+
   componentDidMount() {
     this.getData();
+    this.createNewUser();
   }
 
   toDescriptionPage(e, jobInfo) {
