@@ -1,6 +1,8 @@
 require('dotenv').config()
 const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = new Sequelize(`postgres://${process.env.USERNAME}:${process.env.PASSWORD}@localhost:5432/nyc_jobs`)
+//const sequelize = new Sequelize('nyc_jobs', process.env.USERNAME, process.env.PASSWORD)
+
 
   // try {
   //   await sequelize.authenticate();
@@ -11,7 +13,7 @@ const sequelize = new Sequelize(`postgres://${process.env.USERNAME}:${process.en
 
   sequelize.authenticate()
   .then(() => {
-    console.log('athenticatoed')
+    console.log('athenticated!!')
   })
   .catch((err) => {
     console.log('err: ', err)
@@ -37,3 +39,7 @@ User.init({
 
 // the defined model is the class itself
 console.log(User === sequelize.models.User); // true
+
+
+
+module.exports = { User }
