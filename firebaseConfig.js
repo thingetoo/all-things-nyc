@@ -2,9 +2,10 @@
 // const dotenv = require('dotenv')
 // dotenv.config()
 const firebase = require('firebase');
+import config from './config.js';
 
 var firebaseConfig = {
-  apiKey: 'AIzaSyAvrn3hCsH8NzxXZ4rE1dTY1gQwuo9BAoI',
+  apiKey: config.FIREBASEAPI,
   authDomain: "allthingsnyc-99d07.firebaseapp.com",
   projectId: "allthingsnyc-99d07",
   storageBucket: "allthingsnyc-99d07.appspot.com",
