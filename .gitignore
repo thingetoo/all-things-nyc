@@ -1,7 +1,4 @@
 node_modules
 .env
-<<<<<<< HEAD
-dist/bundle.js
-=======
 dist
->>>>>>> b16c439f82bad667275e6ff7fef2ef498e9bf0e6
+config.js

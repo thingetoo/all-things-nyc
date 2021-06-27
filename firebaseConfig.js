@@ -1,23 +1,24 @@
 //require('dotenv').config()
 // const dotenv = require('dotenv')
 // dotenv.config()
-const firebase = require('firebase');
+import firebase from 'firebase';
+import config from './config.js';
 
+console.log(firebase);
 var firebaseConfig = {
-  apiKey: 'AIzaSyAvrn3hCsH8NzxXZ4rE1dTY1gQwuo9BAoI',
-  authDomain: "allthingsnyc-99d07.firebaseapp.com",
-  projectId: "allthingsnyc-99d07",
-  storageBucket: "allthingsnyc-99d07.appspot.com",
-  messagingSenderId: "236284860023",
-  appId: "1:236284860023:web:921f9a7dbf5fc490099872",
-  measurementId: "G-NB4DYK7KVR"
+  apiKey: config.FIREBASEAPI,
+  authDomain: 'allthingsnyc-99d07.firebaseapp.com',
+  projectId: 'allthingsnyc-99d07',
+  storageBucket: 'allthingsnyc-99d07.appspot.com',
+  messagingSenderId: '236284860023',
+  appId: '1:236284860023:web:921f9a7dbf5fc490099872',
+  measurementId: 'G-NB4DYK7KVR',
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.analytics();
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
+const db = firebaseApp.firestore();
 const auth = firebase.auth();
-const provider = new firebase.auth.GoogleAuthProvider()
+const provider = new firebase.auth.GoogleAuthProvider();
 
-module.exports = { auth, provider }
-
+export { auth, provider };
