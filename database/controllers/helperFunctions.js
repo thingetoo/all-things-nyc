@@ -7,6 +7,7 @@ module.exports = {
     const newUser = User.build({
       firstName: params.firstName, // params.firstName
       lastName: params.lastName, // params.lastName
+      email: params.email
     })
 
     newUser.save().then((saved) => {

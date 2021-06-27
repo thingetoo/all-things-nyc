@@ -4,14 +4,14 @@ const sequelize = new Sequelize(`postgres://${process.env.USERNAME}:${process.en
 //const sequelize = new Sequelize('nyc_jobs', process.env.USERNAME, process.env.PASSWORD)
 
 
-  // try {
-  //   await sequelize.authenticate();
-  //   console.log('Connection has been established successfully.');
-  // } catch (error) {
-  //   console.error('Unable to connect to the database:', error);
-  // }
+// try {
+//   await sequelize.authenticate();
+//   console.log('Connection has been established successfully.');
+// } catch (error) {
+//   console.error('Unable to connect to the database:', error);
+// }
 
-  sequelize.authenticate()
+sequelize.authenticate()
   .then(() => {
     console.log('athenticated!!')
   })
@@ -30,11 +30,24 @@ User.init({
   lastName: {
     type: DataTypes.STRING
     // allowNull defaults to true
+  },
+
+  email: {
+    type: DataTypes.STRING,
+    unique: true
   }
 }, {
   // Other model options go here
   sequelize, // We need to pass the connection instance
-  modelName: 'User' // We need to choose the model name
+  modelName: 'user' // We need to choose the model name
+}, {
+  indexes: [
+    // Create a unique index on email
+    {
+      unique: true,
+      fields: ['email']
+    }
+  ]
 });
 
 // the defined model is the class itself

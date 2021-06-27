@@ -3,6 +3,7 @@ import axios from 'axios';
 import MainPage from '../pages/Main/MainPage.jsx';
 import AboutPage from '../pages/About/About.jsx';
 import JobDescription from '../pages/JobDescription/JobDescription.jsx';
+import { auth, provider } from '../../firebaseConfig.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -19,6 +20,8 @@ class App extends React.Component {
     this.toMainPage = this.toMainPage.bind(this);
     this.toDescriptionPage = this.toDescriptionPage.bind(this);
     this.createNewUser = this.createNewUser.bind(this)
+    this.signIn = this.signIn.bind(this)
+    this.signOut = this.signOut.bind(this)
   }
 
   getData() {
@@ -34,10 +37,27 @@ class App extends React.Component {
       });
   }
 
+
+  signIn() {
+    auth.signInWithPopup(provider).then((payload) => {
+      console.log('payload: ', payload)
+    })
+    .catch((err) => {
+      console.log('error in auth: ', err)
+    })
+  }
+
+  signOut() {
+    auth.signOutInvoked().then(() => {
+      console.log('signed out!')
+    })
+  }
+
   createNewUser() {
     var obj = {
       firstName: 'Jordan',
-      lastName: 'Hamsyyy'
+      lastName: 'Hamsyyy',
+      email: 'hamsyj@jmail.org'
     }
 
     axios.post('/api/user', obj)
@@ -92,6 +112,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <button onClick={this.signIn}>Sign In</button>
+        <button onClick={this.signOut}>Sign Out</button>
         <button onClick={this.toAboutPage}>About</button>
         <button onClick={this.toMainPage}>Main</button>
         <div>{this.currentPage()}</div>
