@@ -1,10 +1,10 @@
-require('dotenv').config()
+//require('dotenv').config()
 // const dotenv = require('dotenv')
 // dotenv.config()
 const firebase = require('firebase');
 
 var firebaseConfig = {
-  apiKey: process.env.FIREBASE,
+  apiKey: 'AIzaSyAvrn3hCsH8NzxXZ4rE1dTY1gQwuo9BAoI',
   authDomain: "allthingsnyc-99d07.firebaseapp.com",
   projectId: "allthingsnyc-99d07",
   storageBucket: "allthingsnyc-99d07.appspot.com",
