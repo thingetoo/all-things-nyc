@@ -37,7 +37,7 @@ addUser(req.body, (err, data) => {
 })
 
 
-User.sync().then(() => {
+User.sync({force: true}).then(() => { // take off the force once table has been finalized
   console.log('go check the shell')
   app.listen(port, () => {
     console.log(`Server listening at localhost:${port}!`);
