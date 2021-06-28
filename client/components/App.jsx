@@ -22,6 +22,7 @@ class App extends React.Component {
     this.createNewUser = this.createNewUser.bind(this);
     this.signIn = this.signIn.bind(this);
     this.signOut = this.signOut.bind(this);
+    this.getJobByKeyWord = this.getJobByKeyWord.bind(this);
   }
 
   getData() {
@@ -35,6 +36,14 @@ class App extends React.Component {
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  getJobByKeyWord(keyword) {
+    axios.get(`/api/jobs/${keyword}`).then((response) => {
+      this.setState({
+        jobs: response.data,
+      });
+    });
   }
 
   signIn() {

@@ -32,7 +32,7 @@ class CategoryList extends React.Component {
   getJobKeywords() {
     axios
       .get(
-        'https://data.cityofnewyork.us/resource/kpav-sd4t.json?$query=SELECT distinct(job_category)'
+        'https://data.cityofnewyork.us/resource/kpav-sd4t.json?$query=SELECT distinct(job_category)' // will need to hook this up to backend route
       )
       .then((res) => {
         var ref = {};
