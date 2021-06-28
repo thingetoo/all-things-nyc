@@ -3,7 +3,7 @@ import axios from 'axios';
 import MainPage from '../pages/Main/MainPage.jsx';
 import AboutPage from '../pages/About/About.jsx';
 import JobDescription from '../pages/JobDescription/JobDescription.jsx';
-import { auth, provider } from '../../firebaseConfig.js'
+import { auth, provider } from '../../firebaseConfig.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -19,9 +19,10 @@ class App extends React.Component {
     this.toAboutPage = this.toAboutPage.bind(this);
     this.toMainPage = this.toMainPage.bind(this);
     this.toDescriptionPage = this.toDescriptionPage.bind(this);
-    this.createNewUser = this.createNewUser.bind(this)
-    this.signIn = this.signIn.bind(this)
-    this.signOut = this.signOut.bind(this)
+    this.createNewUser = this.createNewUser.bind(this);
+    this.signIn = this.signIn.bind(this);
+    this.signOut = this.signOut.bind(this);
+    this.getJobByKeyWord = this.getJobByKeyWord.bind(this);
   }
 
   getData() {
@@ -37,36 +38,47 @@ class App extends React.Component {
       });
   }
 
+  getJobByKeyWord(keyword) {
+    axios.get(`/api/jobs/${keyword}`).then((response) => {
+      this.setState({
+        jobs: response.data,
+      });
+    });
+  }
 
   signIn() {
-    auth.signInWithPopup(provider).then((payload) => {
-      console.log('payload: ', payload)
-    })
-    .catch((err) => {
-      console.log('error in auth: ', err)
-    })
+    auth
+      .signInWithPopup(provider)
+      .then((payload) => {
+        console.log('payload: ', payload);
+      })
+      .catch((err) => {
+        console.log('error in auth: ', err);
+      });
   }
 
   signOut() {
-    auth.signOutInvoked().then(() => {
-      console.log('signed out!')
-    })
+    auth.signOut().then(() => {
+      console.log('signed out!');
+      console.log(auth);
+    });
   }
 
   createNewUser() {
     var obj = {
       firstName: 'Jordan',
       lastName: 'Hamsyyy',
-      email: 'hamsyj@jmail.org'
-    }
+      email: 'hamsyj@jmail.org',
+    };
 
-    axios.post('/api/user', obj)
-    .then((res) => {
-      console.log('successfully posted!', res.data)
-    })
-    .catch((err) => {
-      console.log('err in posting', err)
-    })
+    axios
+      .post('/api/user', obj)
+      .then((res) => {
+        console.log('successfully posted!', res.data);
+      })
+      .catch((err) => {
+        console.log('err in posting', err);
+      });
   }
 
   componentDidMount() {

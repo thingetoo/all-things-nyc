@@ -1,15 +1,14 @@
 .category-container {
-  flex: 2 1 0;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-direction: column;
 }
 
 .cat-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 50% 50%;
   justify-content: space-between;
   border: 1px solid black;
-  height: 75%;
+  height: 75;
   padding: 5px;
 }
