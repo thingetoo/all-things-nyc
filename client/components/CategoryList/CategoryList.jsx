@@ -32,7 +32,7 @@ class CategoryList extends React.Component {
   getJobKeywords() {
     axios
       .get(
-        'https://data.cityofnewyork.us/resource/kpav-sd4t.json?$query=SELECT distinct(job_category)' // will need to hook this up to backend route
+        '/api/categories' // will need to hook this up to backend route
       )
       .then((res) => {
         var ref = {};
@@ -81,11 +81,11 @@ class CategoryList extends React.Component {
   render() {
     return (
       <div className="category-container">
-        <div>Job Keywords</div>
+        <div>Explore Keywords With Active Job Postings</div>
         <div className="cat-list">
           {this.state.categories &&
             this.state.categories.map((category, idx) => {
-              return <Category key={'cat' + idx} data={category} />;
+              return <Category handleCategoryClick={this.props.handleCategoryClick} key={'cat' + idx} data={category} />;
             })}
         </div>
       </div>

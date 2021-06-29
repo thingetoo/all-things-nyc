@@ -13,6 +13,7 @@ class App extends React.Component {
       jobs: [],
       page: 'main',
       currentJob: {},
+      currentKeyword: ''
     };
     this.getData = this.getData.bind(this);
     this.currentPage = this.currentPage.bind(this);
@@ -22,12 +23,13 @@ class App extends React.Component {
     this.createNewUser = this.createNewUser.bind(this);
     this.signIn = this.signIn.bind(this);
     this.signOut = this.signOut.bind(this);
-    this.getJobByKeyWord = this.getJobByKeyWord.bind(this);
+    // this.getJobByKeyWord = this.getJobByKeyWord.bind(this);
+    this.handleCategoryClick = this.handleCategoryClick.bind(this);
   }
 
   getData() {
     axios
-      .get('/api/jobs')
+      .get('/api/allJobs')
       .then((response) => {
         this.setState({
           jobs: response.data,
@@ -38,12 +40,23 @@ class App extends React.Component {
       });
   }
 
-  getJobByKeyWord(keyword) {
+  // getJobByKeyWord(keyword) {
+  //   axios.get(`/api/jobs/${keyword}`).then((response) => {
+  //     this.setState({
+  //       jobs: response.data,
+  //     });
+  //   });
+  // }
+
+  handleCategoryClick(keyword) {
     axios.get(`/api/jobs/${keyword}`).then((response) => {
+      console.log('click', response.data)
       this.setState({
         jobs: response.data,
+        currentKeyword: keyword
       });
     });
+
   }
 
   signIn() {
@@ -99,6 +112,8 @@ class App extends React.Component {
     if (page === 'main') {
       return (
         <MainPage
+          currentKeyword={this.state.currentKeyword}
+          handleCategoryClick={this.handleCategoryClick}
           handleJobClick={this.toDescriptionPage}
           jobs={this.state.jobs}
         />

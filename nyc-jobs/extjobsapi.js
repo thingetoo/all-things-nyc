@@ -11,19 +11,30 @@ module.exports = {
         cb(err);
       });
   },
+  getDistinctJobCategories: function (cb) {
+    axios
+      .get(
+        'https://data.cityofnewyork.us/resource/kpav-sd4t.json?$query=SELECT distinct(job_category)' // will need to hook this up to backend route
+      ).then(res => {
+        cb(res.data)
+      }).catch(err => {
+        cb(err)
+      })
+  },
   getJobByKeyWord: function (keyword, cb) {
+
     const query =
-      `https://data.cityofnewyork.us/resource/kpav-sd4t.json?$query=SELECT * WHERE job_category LIKE '\%` +
+      'https://data.cityofnewyork.us/resource/kpav-sd4t.json?$query= SELECT * WHERE job_category LIKE "%25' +
       keyword +
-      `\%'`;
-    console.log(query);
+      '%25" LIMIT 16';
+
     axios
       .get(query)
       .then((response) => {
-        console.log(response.data);
         cb(response.data);
       })
       .catch((err) => {
+        console.log(err);
         cb(err);
       });
   },
