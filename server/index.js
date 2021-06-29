@@ -1,45 +1,56 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const jobsData = require('../nyc-jobs/extjobsapi.js');
+const { nycJobs, getJobByKeyWord, getDistinctJobCategories } = require('../nyc-jobs/extjobsapi.js');
 // const models = require('../database/index.js')
-const { User, Job } = require('../database/index.js')
+const { User, Job } = require('../database/index.js');
 
-const { addUser } = require('../database/controllers/helperFunctions.js')
-
+const { addUser } = require('../database/controllers/helperFunctions.js');
 
 const { parse, stringify } = require('flatted');
 
 const port = 3000;
 
 app.use(express.static(path.join(__dirname, '..')));
-app.use(express.json())
+app.use(express.json());
 
 app.get('/api', (req, res) => {
   res.send('Your server is online and serving!');
 });
 
-app.get('/api/jobs', (req, res) => {
-  jobsData((data) => {
-    res.json(data.data);
+app.get('/api/allJobs', (req, res) => {
+  nycJobs((data) => {
+    res.json(data);
   });
 });
 
 app.post('/api/user', (req, res) => {
-  console.log('made it to app.post: ', req.body)
-addUser(req.body, (err, data) => {
-  if (err) {
-    console.log('error in posting new user: ', err)
-  } else {
-    res.send(data)
-  }
-})
+  addUser(req.body, (err, data) => {
+    if (err) {
+      console.log('error in posting new user: ', err);
+    } else {
+      res.send(data);
+    }
+  });
+});
+
+app.get('/api/categories', (req, res) => {
+  getDistinctJobCategories((jobObj) => {
+    res.json(jobObj);
+  })
 })
 
+app.get('/api/jobs/:keyword', (req, res) => {
+  const keyword = req.params.keyword;
+  getJobByKeyWord(keyword, (data) => {
+    res.json(data);
+  });
+});
 
-User.sync({force: true}).then(() => { // take off the force once table has been finalized
-  console.log('go check the shell')
+User.sync({ force: true }).then(() => {
+  // take off the force once table has been finalized
+  console.log('go check the shell');
   app.listen(port, () => {
     console.log(`Server listening at localhost:${port}!`);
   });
-})
+});

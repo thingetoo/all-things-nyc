@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = new Sequelize(
-  `postgres://${process.env.USERNAME}:${process.env.PASSWORD}@localhost:5433/nyc_jobs`
+  `postgres://${process.env.USERNAME}:${process.env.PASSWORD}@localhost:${process.env.PORT}/nyc_jobs`
 );
 //const sequelize = new Sequelize('nyc_jobs', process.env.USERNAME, process.env.PASSWORD)
 

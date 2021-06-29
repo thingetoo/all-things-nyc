@@ -6,8 +6,8 @@ import CategoryList from '../../components/CategoryList/CategoryList.jsx';
 const MainPage = (props) => {
   return (
     <div className="main-page-container">
-      <JobList handleJobClick={props.handleJobClick} jobs={props.jobs} />
-      <CategoryList jobs={props.jobs} />
+      <JobList currentKeyword={props.currentKeyword} handleJobClick={props.handleJobClick} jobs={props.jobs} />
+      <CategoryList handleCategoryClick={props.handleCategoryClick} jobs={props.jobs} />
     </div>
   );
 };
